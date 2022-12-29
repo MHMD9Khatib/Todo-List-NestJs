@@ -6,9 +6,12 @@ import { UserModule } from './user/user.module';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
+import { TasksController } from './tasks/tasks.controller';
+import { TasksModule } from './tasks/tasks.module';
+import { Tasks } from './tasks/dto-tasks/entity-tasks/tasks.entity';
   
 @Module({
-  controllers: [ AppController ],
+  controllers: [ AppController, TasksController ],
   imports: [UserModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -18,11 +21,12 @@ import { ProfileModule } from './profile/profile.module';
       username: 'root',
       password: 'password',
       database: 'nestjs',
-      entities: [User],
+      entities: [User, Tasks],
       synchronize: true,
     }),
     AuthModule,
     ProfileModule,
+    TasksModule,
   ],
 })
 export class AppModule {}
